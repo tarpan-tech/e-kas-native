@@ -8,8 +8,8 @@ use SMSGatewayMe\Client\Api\MessageApi;
 use SMSGatewayMe\Client\Api\DeviceApi;
 use SMSGatewayMe\Client\Model\SendMessageRequest;
 
-$device_id = 105448;
-$api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU0MjQxNzcwNCwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjY0MjAxLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.dLZPx7GT80laMjjw6lgw2gubUds3zd6qGjg3pD0doF0';
+$device_id = 105145;
+$api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU0Mjc3MTk3NiwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjYzOTY3LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.5Z3ewDhsdVS7oPWLJapbnMpYIsExDqGv0yyvc4ECn1Y';
 
 function getDevice()
 {

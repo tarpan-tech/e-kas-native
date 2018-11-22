@@ -1,5 +1,9 @@
 <?php
-$query = mysqli_query($conn, "SELECT * FROM kas WHERE id_kelas = '{$_SESSION['id_kelas']}'");
+if ( $_SESSION['id_kelas'] !== NULL ) {
+    $query = mysqli_query($conn, "SELECT * FROM kas WHERE id_kelas = '{$_SESSION['id_kelas']}'");
+} else {
+    $query = mysqli_query($conn, "SELECT * FROM kas");
+}
 $no = 1;
 ?>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">

@@ -1,5 +1,9 @@
 <?php
-$query = mysqli_query($conn, "SELECT siswa.id_siswa, siswa.nama, siswa.no_hp, user.username, kelas.nama as nama_kelas FROM siswa INNER JOIN user ON siswa.id_user = user.id_user INNER JOIN kelas ON siswa.id_kelas = kelas.id_kelas WHERE siswa.id_kelas = '{$_SESSION['id_kelas']}'");
+if ( $_SESSION['id_kelas'] !== NULL ) {
+    $query = mysqli_query($conn, "SELECT siswa.id_siswa, siswa.nama, siswa.no_hp, user.username, kelas.nama as nama_kelas FROM siswa INNER JOIN user ON siswa.id_user = user.id_user INNER JOIN kelas ON siswa.id_kelas = kelas.id_kelas WHERE siswa.id_kelas = '{$_SESSION['id_kelas']}'");
+} else {
+    $query = mysqli_query($conn, "SELECT siswa.id_siswa, siswa.nama, siswa.no_hp, user.username, kelas.nama as nama_kelas FROM siswa INNER JOIN user ON siswa.id_user = user.id_user INNER JOIN kelas ON siswa.id_kelas = kelas.id_kelas");
+}
 $no = 1;
 ?>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
