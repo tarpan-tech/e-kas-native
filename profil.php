@@ -1,9 +1,10 @@
 <?php
 $id_user = $_SESSION['id_user'];
 $siswa   = mysqli_query($conn, "SELECT * FROM siswa WHERE id_user = '$id_user'");
+$result = mysqli_fetch_array($siswa, MYSQLI_ASSOC);
 $kelas   = mysqli_query($conn, "SELECT * FROM kelas");
-$data_siswa = mysqli_num_rows($siswa);
-if ( $data_siswa == 0 ):
+$jumlah_siswa = mysqli_num_rows($siswa);
+if ( $jumlah_siswa == 0 ):
 ?>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -26,7 +27,7 @@ if ( $data_siswa == 0 ):
           <label for="id_kelas">Pilih Kelas</label>
             <select name="id_kelas"class="form-control">
               <?php while($data_kelas = mysqli_fetch_array($kelas, MYSQLI_ASSOC)): ?>
-                <option value="<?= $data_kelas['id_kelas']; ?>"><?= $data_kelas['nama']; ?></option>
+                <option value="<?= $data_kelas['id_kelas']; ?>" ><?= $data_kelas['nama']; ?></option>
               <?php endwhile; ?>
             </select>
         </div>
@@ -36,7 +37,7 @@ if ( $data_siswa == 0 ):
   </div>
   <!-- Akhir konten -->
 </main>
-<?php else: $result = mysqli_fetch_array($siswa, MYSQLI_ASSOC); ?>
+<?php else: ?>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Perbarui Profil</h1>
@@ -58,7 +59,7 @@ if ( $data_siswa == 0 ):
           <label for="id_kelas">Pilih Kelas</label>
             <select name="id_kelas"class="form-control">
               <?php while($data_kelas = mysqli_fetch_array($kelas, MYSQLI_ASSOC)): ?>
-                <option value="<?= $data_kelas['id_kelas']; ?>" <?php if ($result['id_kelas'] == $result['id_kelas']) { echo "selected"; }?> ><?= $data_kelas['nama']; ?></option>
+                <option value="<?= $data_kelas['id_kelas']; ?>" <?php if ($result['id_kelas'] == $data_kelas['id_kelas']) { echo "selected"; }?> ><?= $data_kelas['nama']; ?></option>
               <?php endwhile; ?>
             </select>
         </div>

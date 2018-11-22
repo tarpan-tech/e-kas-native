@@ -1,8 +1,8 @@
 <?php
 if ( $_SESSION['id_kelas'] !== NULL ) {
-    $query = mysqli_query($conn, "SELECT kas_masuk.id_kas_masuk, kas.nama AS nama_kas, siswa.nama AS nama_siswa, kas_masuk.jumlah, kas_masuk.keterangan, kas_masuk.tanggal_masuk FROM kas_masuk INNER JOIN kas ON kas.id_kas = kas_masuk.id_kas INNER JOIN siswa ON kas_masuk.id_siswa = siswa.id_siswa WHERE siswa.id_kelas = '{$_SESSION['id_kelas']}'");
+    $query = mysqli_query($conn, "SELECT kas_masuk.id_kas_masuk, kas.nama AS nama_kas, siswa.nama AS nama_siswa, kas_masuk.jumlah, kas_masuk.keterangan, kas_masuk.tanggal_masuk FROM kas_masuk INNER JOIN kas ON kas.id_kas = kas_masuk.id_kas INNER JOIN siswa ON kas_masuk.id_siswa = siswa.id_siswa WHERE siswa.id_kelas = '{$_SESSION['id_kelas']}' ORDER BY kas.nama ASC");
 } else {
-    $query = mysqli_query($conn, "SELECT kas_masuk.id_kas_masuk, kas.nama AS nama_kas, siswa.nama AS nama_siswa, kas_masuk.jumlah, kas_masuk.keterangan, kas_masuk.tanggal_masuk FROM kas_masuk INNER JOIN kas ON kas.id_kas = kas_masuk.id_kas INNER JOIN siswa ON kas_masuk.id_siswa = siswa.id_siswa");
+    $query = mysqli_query($conn, "SELECT kas_masuk.id_kas_masuk, kas.nama AS nama_kas, siswa.nama AS nama_siswa, kas_masuk.jumlah, kas_masuk.keterangan, kas_masuk.tanggal_masuk FROM kas_masuk INNER JOIN kas ON kas.id_kas = kas_masuk.id_kas INNER JOIN siswa ON kas_masuk.id_siswa = siswa.id_siswa ORDER BY kas.nama ASC");
 }
 $no = 1;
 ?>
@@ -13,6 +13,7 @@ $no = 1;
       <div class="btn-group mr-2">
         <?php if( $_SESSION['level'] <= 3 ): ?>
         <a href="?page=form_tambah_kas_masuk" class="btn btn-sm btn-success text-light">Tambah Data</a>
+        <a href="export_kas_masuk.php" class="btn btn-sm btn-primary text-light">Export ke CSV</a>
         <?php endif; ?>
       </div>
     </div>
@@ -22,7 +23,6 @@ $no = 1;
         <thead class="thead-light">
             <tr>
                 <th>No.</th>
-                <th>ID Kas Masuk</th>
                 <th>Nama Kas</th>
                 <th>Nama Siswa</th>
                 <th>Jumlah</th>
@@ -37,11 +37,10 @@ $no = 1;
             <?php while($result = mysqli_fetch_array($query, MYSQLI_ASSOC)): ?>
             <tr>
                 <td><?= $no++; ?></td>
-                <td><?= $result['id_kas_masuk']; ?></td>
                 <td><?= $result['nama_kas']; ?></td>
                 <td><?= $result['nama_siswa']; ?></td>
-                <td><?= $result['keterangan']; ?></td>
                 <td><?= $result['jumlah']; ?></td>
+                <td><?= $result['keterangan']; ?></td>
                 <td><?= $result['tanggal_masuk']; ?></td>
                 <?php if( $_SESSION['level'] <= 3 ): ?>
                 <td>

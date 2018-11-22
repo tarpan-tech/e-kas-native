@@ -10,6 +10,7 @@ if ( isset($_GET['page']) ) {
 
     if ( file_exists("{$page}.php") ) {
         require 'connect.php';
+        require 'modules/db.php';
         require 'template/header.php';
         require "{$page}.php";
         require 'template/footer.php';        

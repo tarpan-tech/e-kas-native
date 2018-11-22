@@ -41,6 +41,10 @@ if ( isset($_GET['id_kas_masuk']) ) {
             <input name="jumlah" type="number" class="form-control" placeholder="Masukkan jumlah..." value="<?= $result['jumlah']; ?>">
         </div>
         <div class="form-group">
+            <label for="tanggal_masuk">Tanggal Masuk</label>
+            <input name="tanggal_masuk" type="date" class="form-control" value="<?= $result['tanggal_masuk']; ?>">
+        </div>
+        <div class="form-group">
           <label for="keterangan">Keterangan</label>
             <textarea name="keterangan"  cols="30" rows="5" class="form-control"placeholder="Masukkan Keterangan..."><?=$result['keterangan'];?></textarea>
         </div>

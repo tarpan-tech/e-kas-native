@@ -10,7 +10,7 @@ if ( isset($_GET['id_user']) ) {
     <h1 class="h2">Edit User</h1>
   </div>
   <!-- Mulai konten -->
-  <div class="card text-dark bg-light mb-3"">
+  <div class="card text-dark bg-light mb-3">
     <div class="card-header">Form Edit User</div>
     <div class="card-body">
       <form action="proses_ubah_user.php" method="post">
@@ -29,9 +29,9 @@ if ( isset($_GET['id_user']) ) {
         <div class="form-group">
           <label for="level">Hak Akses</label>
             <select name="level" class="form-control">
-              <option value="1" <?php if ($result['level'] == 1){ echo 'selected'; }?>>Wali Kelas</option>
-              <option value="2" <?php if ($result['level'] == 2){ echo 'selected'; }?>>Bendahara</option>
-              <option value="3" <?php if ($result['level'] == 3){ echo 'selected'; }?>>Siswa/Siswi</option>
+              <option value="1" <?php if ($result['level'] == 2){ echo 'selected'; }?>>Wali Kelas</option>
+              <option value="2" <?php if ($result['level'] == 3){ echo 'selected'; }?>>Bendahara</option>
+              <option value="3" <?php if ($result['level'] == 4){ echo 'selected'; }?>>Siswa/Siswi</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Ubah</button>

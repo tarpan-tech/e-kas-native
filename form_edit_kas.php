@@ -29,8 +29,12 @@ if ( isset($_GET['id_kas']) ) {
             </select>
         </div>
         <div class="form-group">
-            <label for="Nama">Nama</label>
+            <label for="nama">Nama</label>
             <input name="nama" type="text" class="form-control" placeholder="Masukkan nama anda..." value="<?= $result['nama']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="tanggal_pembayaran">Tanggal Pembayaran</label>
+            <input name="tanggal_pembayaran" type="date" class="form-control" value="<?= $result['tanggal_pembayaran']; ?>">
         </div>
         <div class="form-group">
           <label for="Keterangan">Keterangan</label>

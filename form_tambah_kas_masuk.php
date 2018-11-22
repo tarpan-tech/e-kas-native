@@ -32,6 +32,10 @@ $siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE id_kelas = '{$_SESSION['
             <input name="jumlah" type="number" class="form-control" placeholder="Jumlah">
         </div>
         <div class="form-group">
+          <label for="tanggal_masuk">Tanggal Masuk</label>
+            <input name="tanggal_masuk" type="date" class="form-control" value="<?= date('Y-m-d'); ?>">
+        </div>
+        <div class="form-group">
           <label for="keterangan">Keterangan</label>
           <textarea name="keterangan" cols="30" rows="5" class="form-control"placeholder="Keterangan..."></textarea>
         </div>

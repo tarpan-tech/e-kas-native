@@ -1,5 +1,16 @@
 <?php
-session_start();
+
+function query($query)
+{
+    global $conn;
+
+    $query = mysqli_query($conn, $query);
+    $result = [];
+    while( $data = mysqli_fetch_array($query, MYSQLI_ASSOC) ):
+        $result[] = $data;
+    endwhile;
+    return $result;
+}
 
 function updateUangKas()
 {

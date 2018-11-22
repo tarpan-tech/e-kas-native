@@ -1,4 +1,5 @@
 <?php
+session_start();
 require'connect.php';
 require 'modules/db.php';
 
@@ -6,7 +7,7 @@ $id_kas    = $_POST['id_kas'];
 $id_siswa = $_POST['id_siswa'];
 $jumlah   = $_POST['jumlah'];
 $keterangan=$_POST['keterangan'];
-$tanggal_masuk =date('Y-m-d');
+$tanggal_masuk = $_POST['tanggal_masuk'];
 
 $query=mysqli_query($conn,"INSERT INTO kas_masuk VALUES (
 '',

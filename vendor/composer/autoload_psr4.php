@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'SMSGatewayMe\\Client\\' => array($vendorDir . '/smsgatewayme/client/lib'),
+    'League\\Csv\\' => array($vendorDir . '/league/csv/src'),
 );

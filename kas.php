@@ -22,7 +22,6 @@ $no = 1;
         <thead class="thead-light">
             <tr>
                 <th>No.</th>
-                <th>ID Kas</th>
                 <th>Nama</th>
                 <th>Keterangan</th>
                 <th>Tanggal Pembayaran</th>
@@ -35,7 +34,6 @@ $no = 1;
             <?php while($result = mysqli_fetch_array($query, MYSQLI_ASSOC)): ?>
             <tr>
                 <td><?= $no++; ?></td>
-                <td><?= $result['id_kas']; ?></td>
                 <td><?= $result['nama']; ?></td>
                 <td><?= $result['keterangan']; ?></td>
                 <td><?= $result['tanggal_pembayaran']; ?></td>

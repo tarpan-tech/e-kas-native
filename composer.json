@@ -6,6 +6,7 @@
         }
     ],
     "require": {
-        "smsgatewayme/client": "^0.0.1"
+        "smsgatewayme/client": "^0.0.1",
+        "league/csv": "^9.1"
     }
 }

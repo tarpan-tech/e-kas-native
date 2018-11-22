@@ -6,10 +6,18 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitcec3b5db6635bd6cbe74bb3514d381d9
 {
+    public static $files = array (
+        '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
             'SMSGatewayMe\\Client\\' => 20,
+        ),
+        'L' => 
+        array (
+            'League\\Csv\\' => 11,
         ),
     );
 
@@ -17,6 +25,10 @@ class ComposerStaticInitcec3b5db6635bd6cbe74bb3514d381d9
         'SMSGatewayMe\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/smsgatewayme/client/lib',
+        ),
+        'League\\Csv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/csv/src',
         ),
     );
 
