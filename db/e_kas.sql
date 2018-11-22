@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 18, 2018 at 03:46 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Host: localhost:3306
+-- Generation Time: Nov 22, 2018 at 08:42 PM
+-- Server version: 10.2.3-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `e_kas`
 --
-CREATE DATABASE IF NOT EXISTS `e_kas` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `e_kas`;
 
 -- --------------------------------------------------------
 
@@ -31,8 +31,8 @@ USE `e_kas`;
 CREATE TABLE `kas` (
   `id_kas` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `keterangan` text NOT NULL,
+  `nama` varchar(50) NOT NULL DEFAULT '0',
+  `keterangan` text NOT NULL DEFAULT '0',
   `tanggal_pembayaran` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -41,12 +41,15 @@ CREATE TABLE `kas` (
 --
 
 INSERT INTO `kas` (`id_kas`, `id_kelas`, `nama`, `keterangan`, `tanggal_pembayaran`) VALUES
-(1, 3, 'November Minggu Ke-1', 'Tidak ada', '2018-11-16'),
-(2, 1, 'November Minggu Ke-1', 'Tidak ada', '2018-11-16'),
-(3, 4, 'November Minggu Ke-1', 'Tidak ada', '2018-11-16'),
-(4, 3, 'November Minggu Ke-2', 'Harus lunas semua titik.', '2018-11-25'),
-(5, 4, 'November Minggu Ke-2', 'Harus Lunas', '2018-11-11'),
-(6, 4, 'November Minggu Ke-3', 'Harus Lunas', '2018-11-25');
+(1, 3, 'November Minggu Ke-1', 'Tidak ada', '2018-11-03'),
+(2, 1, 'November Minggu Ke-1', 'Tidak ada', '2018-11-03'),
+(3, 4, 'November Minggu Ke-1', 'Tidak ada', '2018-11-03'),
+(4, 3, 'November Minggu Ke-2', 'Harus lunas semua titik.', '2018-11-10'),
+(5, 4, 'November Minggu Ke-2', 'Harus Lunas', '2018-11-10'),
+(6, 4, 'November Minggu Ke-3', 'Harus Lunas', '2018-11-17'),
+(7, 1, 'November Minggu Ke-2', 'Tidak ada kasbon', '2018-11-10'),
+(8, 1, 'November Minggu Ke-3', 'Harus Lunas', '2018-11-17'),
+(11, 3, 'November Minggu Ke-3', 'Harus lunas semua', '2018-11-17');
 
 -- --------------------------------------------------------
 
@@ -56,10 +59,10 @@ INSERT INTO `kas` (`id_kas`, `id_kelas`, `nama`, `keterangan`, `tanggal_pembayar
 
 CREATE TABLE `kas_keluar` (
   `id_kas_keluar` int(11) NOT NULL,
-  `id_kelas` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `keterangan` text NOT NULL,
-  `tanggal_keluar` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id_kelas` int(11) NOT NULL DEFAULT 0,
+  `jumlah` int(11) NOT NULL DEFAULT 0,
+  `keterangan` text NOT NULL DEFAULT '0',
+  `tanggal_keluar` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -79,10 +82,10 @@ INSERT INTO `kas_keluar` (`id_kas_keluar`, `id_kelas`, `jumlah`, `keterangan`, `
 
 CREATE TABLE `kas_masuk` (
   `id_kas_masuk` int(11) NOT NULL,
-  `id_kas` int(11) NOT NULL,
-  `id_siswa` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `keterangan` text NOT NULL,
+  `id_kas` int(11) NOT NULL DEFAULT 0,
+  `id_siswa` int(11) NOT NULL DEFAULT 0,
+  `jumlah` int(11) NOT NULL DEFAULT 0,
+  `keterangan` text NOT NULL DEFAULT '0',
   `tanggal_masuk` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -91,14 +94,29 @@ CREATE TABLE `kas_masuk` (
 --
 
 INSERT INTO `kas_masuk` (`id_kas_masuk`, `id_kas`, `id_siswa`, `jumlah`, `keterangan`, `tanggal_masuk`) VALUES
-(1, 1, 1, 2000, 'Lunas', '2018-11-16'),
-(2, 1, 2, 20000, 'Kontan Boss!', '2018-11-17'),
-(3, 1, 8, 2000, 'Lunas', '2018-11-18'),
-(4, 3, 7, 2000, 'Lunas', '2018-11-18'),
-(5, 4, 8, 2000, 'Lunas', '2018-11-18'),
-(6, 1, 9, 2000, 'Lunas', '2018-11-18'),
-(8, 3, 5, 2000, 'Lunas', '2018-11-24'),
-(9, 3, 6, 2000, 'Lunas', '2018-11-18');
+(1, 2, 1, 2000, 'Lunas', '2018-11-16'),
+(2, 2, 2, 2000, 'Kontan Boss!', '2018-11-17'),
+(3, 1, 8, 2000, 'Lunas', '2018-11-04'),
+(4, 3, 7, 2000, 'Lunas', '2018-11-08'),
+(5, 4, 8, 2000, 'Lunas', '2018-11-13'),
+(6, 1, 9, 2000, 'Lunas', '2018-11-09'),
+(7, 5, 7, 2000, 'Lunas', '2018-11-15'),
+(8, 3, 5, 2000, 'Lunas', '2018-11-06'),
+(9, 2, 4, 2000, 'Lunas', '2018-11-22'),
+(10, 7, 1, 2000, 'Lunas', '2018-11-12'),
+(11, 7, 4, 2000, 'Lunas', '2018-11-14'),
+(12, 8, 4, 2000, 'Lunas', '2018-11-22'),
+(14, 8, 1, 2000, 'Lunas', '2018-11-22'),
+(15, 3, 6, 2000, 'Lunas', '2018-11-06'),
+(16, 5, 6, 2000, 'Lunas', '2018-11-15'),
+(17, 6, 6, 2000, 'Lunas', '2018-11-22'),
+(18, 5, 5, 2000, 'Lunas', '2018-11-22'),
+(19, 6, 5, 2000, 'Lunas', '2018-11-22'),
+(20, 3, 10, 2000, 'Lunas', '2018-11-04'),
+(24, 7, 2, 2000, 'Lunas', '2018-11-14'),
+(25, 1, 3, 2000, 'Lunas', '2018-11-10'),
+(26, 4, 3, 2000, 'Lunas', '2018-11-13'),
+(27, 11, 3, 2000, 'Lunas', '2018-11-22');
 
 -- --------------------------------------------------------
 
@@ -108,8 +126,8 @@ INSERT INTO `kas_masuk` (`id_kas_masuk`, `id_kas`, `id_siswa`, `jumlah`, `ketera
 
 CREATE TABLE `kelas` (
   `id_kelas` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `deskripsi` text NOT NULL
+  `nama` varchar(50) NOT NULL DEFAULT '0',
+  `deskripsi` text NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -129,10 +147,10 @@ INSERT INTO `kelas` (`id_kelas`, `nama`, `deskripsi`) VALUES
 
 CREATE TABLE `siswa` (
   `id_siswa` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_kelas` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `no_hp` varchar(15) NOT NULL
+  `id_user` int(11) NOT NULL DEFAULT 0,
+  `id_kelas` int(11) NOT NULL DEFAULT 0,
+  `nama` varchar(255) NOT NULL DEFAULT '0',
+  `no_hp` varchar(15) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -148,7 +166,8 @@ INSERT INTO `siswa` (`id_siswa`, `id_user`, `id_kelas`, `nama`, `no_hp`) VALUES
 (6, 8, 4, 'Siti Hardiyanti', '08716283123'),
 (7, 9, 4, 'Sintia Apriliani', '08382895390'),
 (8, 10, 3, 'Putri Tresnawati', '088176823512'),
-(9, 11, 3, 'Dipo Raja Annom Berlian', '082172635123');
+(9, 11, 3, 'Dipo Raja Annom Berlian', '082172635123'),
+(10, 12, 4, 'M. Brany Oka Saputra', '0887162351231');
 
 -- --------------------------------------------------------
 
@@ -159,7 +178,7 @@ INSERT INTO `siswa` (`id_siswa`, `id_user`, `id_kelas`, `nama`, `no_hp`) VALUES
 CREATE TABLE `uang_kas` (
   `id_kelas` int(11) DEFAULT NULL,
   `jumlah_uang_kas` int(11) DEFAULT NULL,
-  `tanggal_update_terakhir` datetime DEFAULT CURRENT_TIMESTAMP
+  `tanggal_update_terakhir` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -167,9 +186,9 @@ CREATE TABLE `uang_kas` (
 --
 
 INSERT INTO `uang_kas` (`id_kelas`, `jumlah_uang_kas`, `tanggal_update_terakhir`) VALUES
-(1, 2000, '2018-11-16 13:19:17'),
-(3, 2000, '2018-11-18 09:06:54'),
-(4, 5000, '2018-11-18 09:07:03');
+(1, 21500, '2018-11-16 13:19:17'),
+(3, 10000, '2018-11-18 09:06:54'),
+(4, 17000, '2018-11-18 09:07:03');
 
 -- --------------------------------------------------------
 
@@ -179,10 +198,10 @@ INSERT INTO `uang_kas` (`id_kelas`, `jumlah_uang_kas`, `tanggal_update_terakhir`
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` char(60) NOT NULL,
-  `level` int(1) NOT NULL
+  `username` varchar(50) NOT NULL DEFAULT '0',
+  `email` varchar(50) NOT NULL DEFAULT '0',
+  `password` char(60) NOT NULL DEFAULT '0',
+  `level` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -191,7 +210,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `level`) VALUES
 (2, 'geri', 'geri@gmail.com', '$2y$10$/I9g363nRyP2AdlmCpAHWusl/qO5odVjb5MWRFzU17UrFxXZxyKpi', 2),
-(3, 'bendahara', 'bendahara@email.com', '$2y$10$HSZRh0qfb1PdeHX3MYs4VuSn9nb9eUgrDymN60NCnrOMPZr4lU.fi', 3),
+(3, 'sitishalehah', 'sitishalehah@email.com', '$2y$10$vq.pJ/BAEOj7aW5C9deSUOrPHg6Sb7nW5t7T2CRsYHN6i7vSOGST6', 2),
 (4, 'agus', 'agus@email.com', '$2y$10$TLsDbvhZpzyeFi1ZaLbnrerl8hQHk.8T.VJqeRjHwnoxvl7pEEkyq', 4),
 (5, 'eris', 'eris@email.com', '$2y$10$TrZ7FEj7PzPMmvau0pVsoupIW/hX5SiwBtwLX5woE9YQREeaHrPhy', 2),
 (6, 'superadmin', 'superadmin@mail.com', '$2y$10$N27fpig/yfluPwbjqYC.V.ANXW680fN0J59cu/CIQIbL9.elA1jma', 1),
@@ -199,7 +218,8 @@ INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `level`) VALUES
 (8, 'sitihardiyanti', 'sitihardiyanti@mail.com', '$2y$10$NbUUQQhP9QL0360KR6wRZe0o.c9dueQcoPT7jm8m1o3EK6zOFm56u', 3),
 (9, 'sintia', 'sintia@mail.com', '$2y$10$Y5tcZs.nog/6Fz5KsjTyXuJx3Y7..jKK6gDNaEOK6TfvGXPRH4M4.', 4),
 (10, 'putri', 'putri@mail.com', '$2y$10$iZcMiTl6v4VUGbIcZ5jayuXCX7CL7x6uIWZWvwRNXBO06MxI0J7AW', 3),
-(11, 'dipo', 'dipo@mail.com', '$2y$10$XEEVnpLtwDNXylcGRbgrfewyrS.BcD9uqweP/OnqVp.2KJj62EwQW', 4);
+(11, 'dipo', 'dipo@mail.com', '$2y$10$XEEVnpLtwDNXylcGRbgrfewyrS.BcD9uqweP/OnqVp.2KJj62EwQW', 4),
+(12, 'oka', 'oka@mailo.com', '$2y$10$4aendvtDc7GTob8C.FCeN.ccUJPEVYrejwFiGueih9skIRkW7qjji', 4);
 
 --
 -- Indexes for dumped tables
@@ -263,32 +283,38 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kas`
 --
 ALTER TABLE `kas`
-  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `kas_keluar`
 --
 ALTER TABLE `kas_keluar`
   MODIFY `id_kas_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `kas_masuk`
 --
 ALTER TABLE `kas_masuk`
-  MODIFY `id_kas_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_kas_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
 --
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
   MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- Constraints for dumped tables
 --
@@ -324,6 +350,7 @@ ALTER TABLE `siswa`
 --
 ALTER TABLE `uang_kas`
   ADD CONSTRAINT `FK_uang_kas_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
