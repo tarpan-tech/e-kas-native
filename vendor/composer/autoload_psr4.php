@@ -7,5 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'SMSGatewayMe\\Client\\' => array($vendorDir . '/smsgatewayme/client/lib'),
+    'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'PhpOffice\\PhpSpreadsheet\\' => array($vendorDir . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet'),
     'League\\Csv\\' => array($vendorDir . '/league/csv/src'),
+    'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
 );
