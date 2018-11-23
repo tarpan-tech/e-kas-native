@@ -49,8 +49,15 @@ if ( $_SESSION['id_kelas'] !== NULL ) {
             </thead>
             <tbody>
                 <?php
-                $all_kas_masuk = query("SELECT kas_masuk.id_kas_masuk, kas_masuk.keterangan, kas_masuk.jumlah, kas_masuk.tanggal_masuk, siswa.nama as nama_siswa FROM kas_masuk INNER JOIN siswa ON kas_masuk.id_siswa = siswa.id_siswa WHERE siswa.id_kelas = '{$_SESSION['id_kelas']}' AND kas_masuk.id_kas = '{$kas['id_kas']}' ORDER BY kas_masuk.tanggal_masuk ASC");
+
+                if ( $_SESSION['id_kelas'] !== NULL ) {
+                $all_kas_masuk = query("SELECT kas_masuk.id_kas_masuk, kas_masuk.keterangan, kas_masuk.jumlah, kas_masuk.tanggal_masuk, kas_masuk.id_siswa, siswa.nama as nama_siswa FROM kas_masuk INNER JOIN siswa ON kas_masuk.id_siswa = siswa.id_siswa WHERE siswa.id_kelas = '{$_SESSION['id_kelas']}' AND kas_masuk.id_kas = '{$kas['id_kas']}' ORDER BY kas_masuk.tanggal_masuk ASC");
+                } else {
+                $all_kas_masuk = query("SELECT kas_masuk.id_kas_masuk, kas_masuk.keterangan, kas_masuk.jumlah, kas_masuk.tanggal_masuk, kas_masuk.id_siswa, siswa.nama as nama_siswa FROM kas_masuk INNER JOIN siswa ON kas_masuk.id_siswa = siswa.id_siswa WHERE kas_masuk.id_kas = '{$kas['id_kas']}' ORDER BY kas_masuk.tanggal_masuk ASC");
+                }
+                $id_siswa_sudah_membayar = [];
                 foreach( $all_kas_masuk as $kas_masuk ):
+                  $id_siswa_sudah_membayar[] = $kas_masuk['id_siswa'];
                 ?>
                 <tr>
                     <td><?= $kas_masuk['nama_siswa']; ?></td>
@@ -61,6 +68,12 @@ if ( $_SESSION['id_kelas'] !== NULL ) {
                 <?php endforeach; ?>
             </tbody>
         </table>
+      </div>
+      <?php
+      $id_siswa = implode(',', $id_siswa_sudah_membayar);
+      ?>
+      <div>
+        <a class="btn btn-danger text-light" href="proses_remind.php?data=<?= $id_siswa; ?>">Remind!</a>
       </div>
       <!-- End Table-->
       </div>
