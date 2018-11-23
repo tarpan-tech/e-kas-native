@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 22, 2018 at 08:42 PM
+-- Generation Time: Nov 23, 2018 at 02:38 PM
 -- Server version: 10.2.3-MariaDB
 -- PHP Version: 7.1.1
 
@@ -31,8 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `kas` (
   `id_kas` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL DEFAULT '0',
-  `keterangan` text NOT NULL DEFAULT '0',
+  `nama` varchar(50) NOT NULL,
+  `keterangan` text NOT NULL,
   `tanggal_pembayaran` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -49,7 +49,8 @@ INSERT INTO `kas` (`id_kas`, `id_kelas`, `nama`, `keterangan`, `tanggal_pembayar
 (6, 4, 'November Minggu Ke-3', 'Harus Lunas', '2018-11-17'),
 (7, 1, 'November Minggu Ke-2', 'Tidak ada kasbon', '2018-11-10'),
 (8, 1, 'November Minggu Ke-3', 'Harus Lunas', '2018-11-17'),
-(11, 3, 'November Minggu Ke-3', 'Harus lunas semua', '2018-11-17');
+(11, 3, 'November Minggu Ke-3', 'Harus lunas semua', '2018-11-17'),
+(12, 4, 'November Minggu Ke-4', 'Harus lunas semuanya', '2018-11-23');
 
 -- --------------------------------------------------------
 
@@ -59,9 +60,9 @@ INSERT INTO `kas` (`id_kas`, `id_kelas`, `nama`, `keterangan`, `tanggal_pembayar
 
 CREATE TABLE `kas_keluar` (
   `id_kas_keluar` int(11) NOT NULL,
-  `id_kelas` int(11) NOT NULL DEFAULT 0,
-  `jumlah` int(11) NOT NULL DEFAULT 0,
-  `keterangan` text NOT NULL DEFAULT '0',
+  `id_kelas` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `keterangan` text NOT NULL,
   `tanggal_keluar` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -82,10 +83,10 @@ INSERT INTO `kas_keluar` (`id_kas_keluar`, `id_kelas`, `jumlah`, `keterangan`, `
 
 CREATE TABLE `kas_masuk` (
   `id_kas_masuk` int(11) NOT NULL,
-  `id_kas` int(11) NOT NULL DEFAULT 0,
-  `id_siswa` int(11) NOT NULL DEFAULT 0,
-  `jumlah` int(11) NOT NULL DEFAULT 0,
-  `keterangan` text NOT NULL DEFAULT '0',
+  `id_kas` int(11) NOT NULL,
+  `id_siswa` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `keterangan` text NOT NULL,
   `tanggal_masuk` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -116,7 +117,8 @@ INSERT INTO `kas_masuk` (`id_kas_masuk`, `id_kas`, `id_siswa`, `jumlah`, `ketera
 (24, 7, 2, 2000, 'Lunas', '2018-11-14'),
 (25, 1, 3, 2000, 'Lunas', '2018-11-10'),
 (26, 4, 3, 2000, 'Lunas', '2018-11-13'),
-(27, 11, 3, 2000, 'Lunas', '2018-11-22');
+(27, 11, 3, 2000, 'Lunas', '2018-11-22'),
+(28, 12, 5, 2000, 'Lunas', '2018-11-23');
 
 -- --------------------------------------------------------
 
@@ -126,8 +128,8 @@ INSERT INTO `kas_masuk` (`id_kas_masuk`, `id_kas`, `id_siswa`, `jumlah`, `ketera
 
 CREATE TABLE `kelas` (
   `id_kelas` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL DEFAULT '0',
-  `deskripsi` text NOT NULL DEFAULT '0'
+  `nama` varchar(50) NOT NULL,
+  `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -147,10 +149,10 @@ INSERT INTO `kelas` (`id_kelas`, `nama`, `deskripsi`) VALUES
 
 CREATE TABLE `siswa` (
   `id_siswa` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL DEFAULT 0,
-  `id_kelas` int(11) NOT NULL DEFAULT 0,
-  `nama` varchar(255) NOT NULL DEFAULT '0',
-  `no_hp` varchar(15) NOT NULL DEFAULT '0'
+  `id_user` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `no_hp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -188,7 +190,7 @@ CREATE TABLE `uang_kas` (
 INSERT INTO `uang_kas` (`id_kelas`, `jumlah_uang_kas`, `tanggal_update_terakhir`) VALUES
 (1, 21500, '2018-11-16 13:19:17'),
 (3, 10000, '2018-11-18 09:06:54'),
-(4, 17000, '2018-11-18 09:07:03');
+(4, 19000, '2018-11-18 09:07:03');
 
 -- --------------------------------------------------------
 
@@ -198,10 +200,10 @@ INSERT INTO `uang_kas` (`id_kelas`, `jumlah_uang_kas`, `tanggal_update_terakhir`
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL DEFAULT '0',
-  `email` varchar(50) NOT NULL DEFAULT '0',
-  `password` char(60) NOT NULL DEFAULT '0',
-  `level` int(1) NOT NULL DEFAULT 0
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` char(60) NOT NULL,
+  `level` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -283,7 +285,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kas`
 --
 ALTER TABLE `kas`
-  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `kas_keluar`
@@ -295,7 +297,7 @@ ALTER TABLE `kas_keluar`
 -- AUTO_INCREMENT for table `kas_masuk`
 --
 ALTER TABLE `kas_masuk`
-  MODIFY `id_kas_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_kas_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `kelas`

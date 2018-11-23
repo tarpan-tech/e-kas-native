@@ -13,7 +13,6 @@ $no = 1;
       <div class="btn-group mr-2">
         <?php if( $_SESSION['level'] <= 3 ): ?>
         <a href="?page=form_tambah_kas_masuk" class="btn btn-sm btn-success text-light">Tambah Data</a>
-        <a href="export_kas_masuk.php" class="btn btn-sm btn-primary text-light">Export ke CSV</a>
         <?php endif; ?>
       </div>
     </div>

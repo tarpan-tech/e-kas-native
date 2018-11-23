@@ -41,7 +41,6 @@ $no = 1;
                 <td>
                     <a href="?page=form_edit_kas&id_kas=<?= $result['id_kas']; ?>" class="btn btn-primary">Ubah</a>
                     <a href="proses_hapus_kas.php?id_kas=<?= $result['id_kas']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
-                    <a href="proses_kirim_pesan_terlambat.php?id_kas=<?= $result['id_kas']; ?>" class="btn btn-danger">Kirim Pesan Terlambat</a>
                 </td>
                 <?php endif; ?>
             </tr>
